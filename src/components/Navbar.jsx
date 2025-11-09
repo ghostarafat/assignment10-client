@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../providers/AuthProvider";
 
 const Navbar = () => {
-  const [user, setUser] = useState(null);
+  const { user, logOut } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <nav className="bg-blue-600 p-4 shadow-md">
       <div className="container mx-auto flex justify-between items-center">
-        {/* Left: Logo + Website Name */}
+        {/* Logo + Website Name */}
         <div className="flex items-center gap-2">
           <img
             src="https://cdn-icons-png.flaticon.com/512/616/616408.png"
@@ -20,7 +21,7 @@ const Navbar = () => {
           </Link>
         </div>
 
-        {/* Middle Menu (desktop only) */}
+        {/* Middle Menu (Desktop only) */}
         <div className="hidden md:flex gap-6 text-white">
           <Link to="/" className="hover:text-blue-200 transition">
             Home
@@ -28,9 +29,29 @@ const Navbar = () => {
           <Link to="/pets-supplies" className="hover:text-blue-200 transition">
             Pets & Supplies
           </Link>
+
+          {user && (
+            <>
+              <Link
+                to="/add-listing"
+                className="hover:text-blue-200 transition"
+              >
+                Add Listing
+              </Link>
+              <Link
+                to="/my-listings"
+                className="hover:text-blue-200 transition"
+              >
+                My Listings
+              </Link>
+              <Link to="/my-orders" className="hover:text-blue-200 transition">
+                My Orders
+              </Link>
+            </>
+          )}
         </div>
 
-        {/* Right Side (Login/Register or Avatar/Logout) */}
+        {/* Right Side */}
         <div className="hidden md:flex items-center gap-4">
           {!user ? (
             <>
@@ -57,7 +78,7 @@ const Navbar = () => {
                 className="w-8 h-8 rounded-full border-2 border-white"
               />
               <button
-                onClick={() => setUser(null)}
+                onClick={logOut}
                 className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded transition"
               >
                 Logout
@@ -66,7 +87,7 @@ const Navbar = () => {
           )}
         </div>
 
-        {/* Hamburger button (mobile only) */}
+        {/* Mobile Menu Button */}
         <button
           className="text-white md:hidden"
           onClick={() => setIsOpen(!isOpen)}
@@ -105,7 +126,7 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Mobile menu */}
+      {/* Mobile Menu */}
       {isOpen && (
         <div className="md:hidden mt-3 text-white flex flex-col gap-2">
           <Link to="/" className="hover:text-blue-200 transition">
@@ -146,7 +167,7 @@ const Navbar = () => {
             </>
           ) : (
             <button
-              onClick={() => setUser(null)}
+              onClick={logOut}
               className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded transition w-fit"
             >
               Logout
