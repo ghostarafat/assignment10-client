@@ -1,64 +1,78 @@
-import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+// src/pages/Login.jsx
+import { useContext, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
-import { toast } from "react-hot-toast";
+import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
-const Login = () => {
-  const { loginUser } = useContext(AuthContext);
+export default function Login() {
+  const { loginUser, googleLogin } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [error, setError] = useState("");
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleSubmit = (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
 
     loginUser(email, password)
       .then(() => {
-        toast.success("Login successful!");
+        toast.success("Login Successful!");
         navigate("/");
       })
-      .catch((error) => toast.error(error.message));
+      .catch(() => setError("Invalid email or password"));
+  };
+
+  const handleGoogleLogin = () => {
+    googleLogin()
+      .then(() => {
+        toast.success("Google Login Successful!");
+        navigate("/");
+      })
+      .catch(() => toast.error("Google login failed"));
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="flex justify-center items-center h-screen bg-gray-100">
       <form
-        onSubmit={handleSubmit}
-        className="bg-white p-6 rounded shadow-md w-full max-w-sm"
+        onSubmit={handleLogin}
+        className="bg-white p-6 rounded-lg shadow-md w-80"
       >
         <h2 className="text-2xl font-bold mb-4 text-center">Login</h2>
         <input
           type="email"
+          name="email"
           placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
           required
-          className="w-full mb-3 px-3 py-2 border rounded"
+          className="border w-full p-2 mb-3 rounded"
         />
         <input
           type="password"
+          name="password"
           placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
           required
-          className="w-full mb-3 px-3 py-2 border rounded"
+          className="border w-full p-2 mb-3 rounded"
         />
         <button
           type="submit"
-          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
+          className="bg-blue-500 text-white w-full py-2 rounded hover:bg-blue-600"
         >
           Login
         </button>
-        <p className="mt-3 text-center">
-          Don't have an account?{" "}
-          <Link to="/register" className="text-blue-600 hover:underline">
+        <button
+          type="button"
+          onClick={handleGoogleLogin}
+          className="bg-red-500 text-white w-full py-2 rounded mt-3 hover:bg-red-600"
+        >
+          Login with Google
+        </button>
+        {error && <p className="text-red-500 text-center mt-2">{error}</p>}
+        <p className="text-center mt-3 text-sm">
+          Don’t have an account?{" "}
+          <Link to="/register" className="text-blue-600 font-semibold">
             Register here
           </Link>
         </p>
       </form>
     </div>
   );
-};
-
-export default Login;
+}

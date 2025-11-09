@@ -1,94 +1,97 @@
-import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
-import { toast } from "react-hot-toast";
+import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
-const Register = () => {
-  const { registerUser } = useContext(AuthContext);
+export default function Register() {
+  const { registerUser, googleLogin } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [error, setError] = useState("");
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [photoURL, setPhotoURL] = useState("");
-
-  const handleSubmit = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
+    const name = e.target.name.value;
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    const photoURL = e.target.photoURL.value;
 
-    if (!/[A-Z]/.test(password)) {
-      toast.error("Password must contain at least 1 uppercase letter");
-      return;
-    }
-    if (!/[a-z]/.test(password)) {
-      toast.error("Password must contain at least 1 lowercase letter");
-      return;
-    }
-    if (password.length < 6) {
-      toast.error("Password must be at least 6 characters long");
-      return;
-    }
+    if (!/[A-Z]/.test(password)) return setError("At least 1 uppercase letter");
+    if (!/[a-z]/.test(password)) return setError("At least 1 lowercase letter");
+    if (password.length < 6) return setError("Minimum 6 characters required");
 
-    registerUser(email, password)
+    try {
+      await registerUser(name, email, password, photoURL);
+      toast.success("Registration Successful!");
+      navigate("/");
+    } catch {
+      setError("Registration failed");
+    }
+  };
+
+  const handleGoogleLogin = () => {
+    googleLogin()
       .then(() => {
-        toast.success("Registration successful!");
+        toast.success("Google Login Successful!");
         navigate("/");
       })
-      .catch((error) => toast.error(error.message));
+      .catch(() => toast.error("Google login failed"));
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="flex justify-center items-center h-screen bg-gray-100">
       <form
-        onSubmit={handleSubmit}
-        className="bg-white p-6 rounded shadow-md w-full max-w-sm"
+        onSubmit={handleRegister}
+        className="bg-white p-6 rounded-lg shadow-md w-80"
       >
         <h2 className="text-2xl font-bold mb-4 text-center">Register</h2>
         <input
           type="text"
+          name="name"
           placeholder="Full Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
           required
-          className="w-full mb-3 px-3 py-2 border rounded"
+          className="border w-full p-2 mb-3 rounded"
         />
         <input
           type="email"
+          name="email"
           placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
           required
-          className="w-full mb-3 px-3 py-2 border rounded"
+          className="border w-full p-2 mb-3 rounded"
         />
         <input
           type="password"
+          name="password"
           placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
           required
-          className="w-full mb-3 px-3 py-2 border rounded"
+          className="border w-full p-2 mb-3 rounded"
         />
         <input
           type="text"
+          name="photoURL"
           placeholder="Photo URL"
-          value={photoURL}
-          onChange={(e) => setPhotoURL(e.target.value)}
-          className="w-full mb-3 px-3 py-2 border rounded"
+          className="border w-full p-2 mb-3 rounded"
         />
         <button
           type="submit"
-          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
+          className="bg-green-500 text-white w-full py-2 rounded hover:bg-green-600"
         >
           Register
         </button>
-        <p className="mt-3 text-center">
+        <button
+          type="button"
+          onClick={handleGoogleLogin}
+          className="bg-red-500 text-white w-full py-2 rounded mt-3 hover:bg-red-600"
+        >
+          Register with Google
+        </button>
+        {error && <p className="text-red-500 text-center mt-2">{error}</p>}
+        <p className="text-center mt-3 text-sm">
           Already have an account?{" "}
-          <Link to="/login" className="text-blue-600 hover:underline">
+          <Link to="/login" className="text-blue-600 font-semibold">
             Login here
           </Link>
         </p>
       </form>
     </div>
   );
-};
-
-export default Register;
+}

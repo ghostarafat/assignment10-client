@@ -28,7 +28,7 @@ const AddListing = () => {
 
     const payload = {
       ...formData,
-      email: user.email, // current user's email
+      email: user.email,
     };
 
     try {

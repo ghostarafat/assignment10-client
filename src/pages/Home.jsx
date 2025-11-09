@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios"; // For API call to fetch listings
-
+import axios from "axios";
 const Home = () => {
   const [listings, setListings] = useState([]);
 
   useEffect(() => {
-    // Fetch latest 6 listings from server
     axios
-      .get("http://localhost:5000/listings?limit=6") // adjust URL according to your server
+      .get("http://localhost:5000/listings?limit=6")
       .then((res) => setListings(res.data))
       .catch((err) => console.log(err));
   }, []);
