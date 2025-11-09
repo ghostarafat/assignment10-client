@@ -8,6 +8,11 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ErrorPage from "./pages/ErrorPage";
+import AddListing from "./pages/AddListing";
+import PetsSupplies from "./pages/PetsSupplies";
+import ListingDetails from "./pages/ListingDetails";
+import MyOrders from "./pages/MyOrders";
+import MyListings from "./pages/MyListings";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +23,11 @@ const router = createBrowserRouter([
       { path: "/", element: <Home /> },
       { path: "/login", element: <Login /> },
       { path: "/register", element: <Register /> },
+      { path: "/add-listing", element: <AddListing /> },
+      { path: "/pets-supplies", element: <PetsSupplies /> },
+      { path: "/listing-details/:id", element: <ListingDetails /> },
+      { path: "/my-listings", element: <MyListings /> },
+      { path: "/my-orders", element: <MyOrders /> },
     ],
   },
 ]);
