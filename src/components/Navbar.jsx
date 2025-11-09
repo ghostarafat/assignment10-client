@@ -1,15 +1,29 @@
 import React, { useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
+import { toast } from "react-hot-toast";
 
 const Navbar = () => {
-  const { user, logOut } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout()
+      .then(() => {
+        toast.success("Logged out successfully!");
+        navigate("/login");
+      })
+      .catch((error) => {
+        console.error(error);
+        toast.error("Logout failed!");
+      });
+  };
 
   return (
     <nav className="bg-blue-600 p-4 shadow-md">
       <div className="container mx-auto flex justify-between items-center">
-        {/* Logo + Website Name */}
+        {/* 🔹 Logo + Website Name */}
         <div className="flex items-center gap-2">
           <img
             src="https://cdn-icons-png.flaticon.com/512/616/616408.png"
@@ -21,7 +35,7 @@ const Navbar = () => {
           </Link>
         </div>
 
-        {/* Middle Menu (Desktop only) */}
+        {/* 🔹 Middle Menu (Desktop only) */}
         <div className="hidden md:flex gap-6 text-white">
           <Link to="/" className="hover:text-blue-200 transition">
             Home
@@ -51,19 +65,21 @@ const Navbar = () => {
           )}
         </div>
 
-        {/* Right Side */}
+        {/* 🔹 Right Side */}
         <div className="hidden md:flex items-center gap-4">
           {!user ? (
             <>
               <Link
                 to="/login"
                 className="text-white hover:text-blue-200 transition"
+                onClick={() => toast("Welcome back! Please log in.")}
               >
                 Login
               </Link>
               <Link
                 to="/register"
                 className="text-white hover:text-blue-200 transition"
+                onClick={() => toast("Create a new account to get started!")}
               >
                 Register
               </Link>
@@ -78,7 +94,7 @@ const Navbar = () => {
                 className="w-8 h-8 rounded-full border-2 border-white"
               />
               <button
-                onClick={logOut}
+                onClick={handleLogout}
                 className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded transition"
               >
                 Logout
@@ -87,7 +103,7 @@ const Navbar = () => {
           )}
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* 🔹 Mobile Menu Button */}
         <button
           className="text-white md:hidden"
           onClick={() => setIsOpen(!isOpen)}
@@ -126,7 +142,7 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* 🔹 Mobile Menu */}
       {isOpen && (
         <div className="md:hidden mt-3 text-white flex flex-col gap-2">
           <Link to="/" className="hover:text-blue-200 transition">
@@ -158,16 +174,24 @@ const Navbar = () => {
 
           {!user ? (
             <>
-              <Link to="/login" className="hover:text-blue-200 transition">
+              <Link
+                to="/login"
+                className="hover:text-blue-200 transition"
+                onClick={() => toast("Welcome back! Please log in.")}
+              >
                 Login
               </Link>
-              <Link to="/register" className="hover:text-blue-200 transition">
+              <Link
+                to="/register"
+                className="hover:text-blue-200 transition"
+                onClick={() => toast("Create a new account to get started!")}
+              >
                 Register
               </Link>
             </>
           ) : (
             <button
-              onClick={logOut}
+              onClick={handleLogout}
               className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded transition w-fit"
             >
               Logout
