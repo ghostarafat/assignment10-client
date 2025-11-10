@@ -1,10 +1,13 @@
 import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
+import { ThemeContext } from "../context/ThemeContext";
 import { toast } from "react-hot-toast";
+import { Sun, Moon } from "lucide-react";
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
+  const { theme, toggleTheme } = useContext(ThemeContext);
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -21,64 +24,70 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-blue-600 p-4 shadow-md">
+    <nav
+      className={`p-4 shadow-md ${
+        theme === "light"
+          ? "bg-blue-600 text-white"
+          : "bg-gray-900 text-yellow-300"
+      }`}
+    >
       <div className="container mx-auto flex justify-between items-center">
-        {/* 🔹 Logo + Website Name */}
         <div className="flex items-center gap-2">
           <img
             src="https://cdn-icons-png.flaticon.com/512/616/616408.png"
             alt="logo"
             className="w-8 h-8"
           />
-          <Link to="/" className="text-white text-2xl font-bold">
+          <Link to="/" className="text-2xl font-bold">
             PawMart
           </Link>
         </div>
 
-        {/* 🔹 Middle Menu (Desktop only) */}
-        <div className="hidden md:flex gap-6 text-white">
-          <Link to="/" className="hover:text-blue-200 transition">
+        {/*  Middle Menu (Desktop only) */}
+        <div className="hidden md:flex gap-6">
+          <Link to="/" className="hover:opacity-80 transition">
             Home
           </Link>
-          <Link to="/pets-supplies" className="hover:text-blue-200 transition">
+          <Link to="/pets-supplies" className="hover:opacity-80 transition">
             Pets & Supplies
           </Link>
 
           {user && (
             <>
-              <Link
-                to="/add-listing"
-                className="hover:text-blue-200 transition"
-              >
+              <Link to="/add-listing" className="hover:opacity-80 transition">
                 Add Listing
               </Link>
-              <Link
-                to="/my-listings"
-                className="hover:text-blue-200 transition"
-              >
+              <Link to="/my-listings" className="hover:opacity-80 transition">
                 My Listings
               </Link>
-              <Link to="/my-orders" className="hover:text-blue-200 transition">
+              <Link to="/my-orders" className="hover:opacity-80 transition">
                 My Orders
               </Link>
             </>
           )}
         </div>
 
-        {/* 🔹 Right Side */}
         <div className="hidden md:flex items-center gap-4">
+          <button
+            onClick={toggleTheme}
+            className="p-2 rounded-full bg-white/20 hover:bg-white/30 transition"
+            title="Toggle Theme"
+          >
+            {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
+          </button>
+
           {!user ? (
             <>
               <Link
                 to="/login"
-                className="text-white hover:text-blue-200 transition"
+                className="hover:opacity-80 transition"
                 onClick={() => toast("Welcome back! Please log in.")}
               >
                 Login
               </Link>
               <Link
                 to="/register"
-                className="text-white hover:text-blue-200 transition"
+                className="hover:opacity-80 transition"
                 onClick={() => toast("Create a new account to get started!")}
               >
                 Register
@@ -103,10 +112,11 @@ const Navbar = () => {
           )}
         </div>
 
-        {/* 🔹 Mobile Menu Button */}
+        {/*  Mobile Menu Button */}
         <button
-          className="text-white md:hidden"
+          className="md:hidden"
           onClick={() => setIsOpen(!isOpen)}
+          aria-label="Toggle menu"
         >
           {isOpen ? (
             <svg
@@ -114,7 +124,6 @@ const Navbar = () => {
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
             >
               <path
                 strokeLinecap="round"
@@ -129,7 +138,6 @@ const Navbar = () => {
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
             >
               <path
                 strokeLinecap="round"
@@ -142,31 +150,35 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* 🔹 Mobile Menu */}
+      {/*  Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden mt-3 text-white flex flex-col gap-2">
-          <Link to="/" className="hover:text-blue-200 transition">
+        <div className="md:hidden mt-3 flex flex-col gap-2">
+          <div className="flex justify-between items-center">
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-full bg-white/20 hover:bg-white/30 transition"
+              title="Toggle Theme"
+            >
+              {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
+            </button>
+          </div>
+
+          <Link to="/" className="hover:opacity-80 transition">
             Home
           </Link>
-          <Link to="/pets-supplies" className="hover:text-blue-200 transition">
+          <Link to="/pets-supplies" className="hover:opacity-80 transition">
             Pets & Supplies
           </Link>
 
           {user && (
             <>
-              <Link
-                to="/add-listing"
-                className="hover:text-blue-200 transition"
-              >
+              <Link to="/add-listing" className="hover:opacity-80 transition">
                 Add Listing
               </Link>
-              <Link
-                to="/my-listings"
-                className="hover:text-blue-200 transition"
-              >
+              <Link to="/my-listings" className="hover:opacity-80 transition">
                 My Listings
               </Link>
-              <Link to="/my-orders" className="hover:text-blue-200 transition">
+              <Link to="/my-orders" className="hover:opacity-80 transition">
                 My Orders
               </Link>
             </>
@@ -176,14 +188,14 @@ const Navbar = () => {
             <>
               <Link
                 to="/login"
-                className="hover:text-blue-200 transition"
+                className="hover:opacity-80 transition"
                 onClick={() => toast("Welcome back! Please log in.")}
               >
                 Login
               </Link>
               <Link
                 to="/register"
-                className="hover:text-blue-200 transition"
+                className="hover:opacity-80 transition"
                 onClick={() => toast("Create a new account to get started!")}
               >
                 Register

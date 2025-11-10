@@ -15,7 +15,8 @@ import MyOrders from "./pages/MyOrders";
 import MyListings from "./pages/MyListings";
 import CategoryFilteredProduct from "./pages/CategoryFilteredProduct";
 import { Toaster } from "react-hot-toast";
-import PrivateRoute from "./routes/PrivateRoute"; 
+import PrivateRoute from "./routes/PrivateRoute";
+import { ThemeProvider } from "./context/ThemeContext";
 
 const router = createBrowserRouter([
   {
@@ -23,11 +24,17 @@ const router = createBrowserRouter([
     element: <Layout />,
     errorElement: <ErrorPage />,
     children: [
+      // 🏠 Public Routes
       { path: "/", element: <Home /> },
       { path: "/login", element: <Login /> },
       { path: "/register", element: <Register /> },
+      { path: "/pets-supplies", element: <PetsSupplies /> },
+      {
+        path: "/category-filtered-product/:categoryName",
+        element: <CategoryFilteredProduct />,
+      },
 
-      
+      // 🔒 Private Routes (Only for Logged-in Users)
       {
         path: "/add-listing",
         element: (
@@ -36,14 +43,29 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-
-      { path: "/pets-supplies", element: <PetsSupplies /> },
-      { path: "/listing-details/:id", element: <ListingDetails /> },
-      { path: "/my-listings", element: <MyListings /> },
-      { path: "/my-orders", element: <MyOrders /> },
       {
-        path: "/category-filtered-product/:categoryName",
-        element: <CategoryFilteredProduct />,
+        path: "/listing-details/:id",
+        element: (
+          <PrivateRoute>
+            <ListingDetails />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/my-listings",
+        element: (
+          <PrivateRoute>
+            <MyListings />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/my-orders",
+        element: (
+          <PrivateRoute>
+            <MyOrders />
+          </PrivateRoute>
+        ),
       },
     ],
   },
@@ -51,9 +73,11 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <AuthProvider>
-      <RouterProvider router={router} />
-      <Toaster position="top-center" reverseOrder={false} />
-    </AuthProvider>
+    <ThemeProvider>
+      <AuthProvider>
+        <RouterProvider router={router} />
+        <Toaster position="top-center" reverseOrder={false} />
+      </AuthProvider>
+    </ThemeProvider>
   </StrictMode>
 );
