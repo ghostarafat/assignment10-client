@@ -3,7 +3,7 @@ import axios from "axios";
 import { AuthContext } from "../providers/AuthProvider";
 import toast from "react-hot-toast";
 import jsPDF from "jspdf";
-import "jspdf-autotable";
+import autoTable from "jspdf-autotable";
 
 const MyOrders = () => {
   const { user } = useContext(AuthContext);
@@ -54,11 +54,12 @@ const MyOrders = () => {
       tableRows.push(orderData);
     });
 
-    doc.autoTable({
+    autoTable(doc, {
       head: [tableColumn],
       body: tableRows,
       startY: 20,
     });
+
     doc.text("My Orders Report", 14, 15);
     doc.save("my_orders.pdf");
   };
