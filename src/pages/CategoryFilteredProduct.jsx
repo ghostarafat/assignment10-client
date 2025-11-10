@@ -10,7 +10,7 @@ const CategoryFilteredProduct = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://localhost:5000/listings?category=${categoryName}`)
+      .get(`http://localhost:3000/listings?category=${categoryName}`)
       .then((res) => setFilteredListings(res.data))
       .catch((err) => console.error(err))
       .finally(() => setLoading(false));

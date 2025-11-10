@@ -21,7 +21,7 @@ const EditListingModal = ({ listing, onClose, onUpdate }) => {
     e.preventDefault();
     try {
       await axios.put(
-        `http://localhost:5000/listings/${listing._id}`,
+        `http://localhost:3000/listings/${listing._id}`,
         formData
       );
       toast.success("Listing updated successfully!");

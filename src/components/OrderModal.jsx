@@ -30,7 +30,7 @@ const OrderModal = ({ listing, onClose }) => {
     };
 
     try {
-      await axios.post("http://localhost:5000/orders", orderData);
+      await axios.post("http://localhost:3000/orders", orderData);
       toast.success("Order placed successfully!");
       onClose();
     } catch (error) {

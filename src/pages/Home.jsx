@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Banner from "../components/Banner";
 import CategorySection from "../components/CategorySection";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [listings, setListings] = useState([]);
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/listings?limit=6")
+      .get("http://localhost:3000/listings?limit=6")
       .then((res) => setListings(res.data))
       .catch((err) => console.log(err));
   }, []);
