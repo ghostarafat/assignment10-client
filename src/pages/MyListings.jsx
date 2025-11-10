@@ -10,14 +10,17 @@ const MyListings = () => {
   const [loading, setLoading] = useState(true);
   const [editListing, setEditListing] = useState(null);
 
+  // Fetch listings for logged-in user
   const fetchListings = async () => {
+    if (!user) return;
+    setLoading(true);
     try {
       const res = await axios.get(
-        `http://localhost:5000/listings?email=${user.email}`
+        `http://localhost:3000/listings?email=${user.email}` // ✅ Changed port to 3000
       );
       setListings(res.data);
     } catch (error) {
-      console.log(error);
+      console.error(error);
       toast.error("Failed to fetch listings");
     } finally {
       setLoading(false);
@@ -25,28 +28,30 @@ const MyListings = () => {
   };
 
   useEffect(() => {
-    if (user) fetchListings();
+    fetchListings();
   }, [user]);
 
+  // Delete a listing
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this listing?"))
       return;
     try {
-      await axios.delete(`http://localhost:5000/listings/${id}`);
+      await axios.delete(`http://localhost:3000/listings/${id}`); // ✅ Changed port
       toast.success("Listing deleted!");
       fetchListings();
     } catch (error) {
-      console.log(error);
+      console.error(error);
       toast.error("Failed to delete listing");
     }
   };
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <p className="text-center mt-10">Loading...</p>;
 
   return (
     <div className="min-h-screen p-6">
       <h2 className="text-2xl font-bold mb-4">My Listings</h2>
       {listings.length === 0 && <p>No listings found.</p>}
+
       <div className="overflow-x-auto">
         <table className="table-auto w-full border border-gray-300">
           <thead>

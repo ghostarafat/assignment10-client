@@ -13,7 +13,9 @@ import PetsSupplies from "./pages/PetsSupplies";
 import ListingDetails from "./pages/ListingDetails";
 import MyOrders from "./pages/MyOrders";
 import MyListings from "./pages/MyListings";
+import CategoryFilteredProduct from "./pages/CategoryFilteredProduct";
 import { Toaster } from "react-hot-toast";
+import PrivateRoute from "./routes/PrivateRoute"; 
 
 const router = createBrowserRouter([
   {
@@ -24,11 +26,25 @@ const router = createBrowserRouter([
       { path: "/", element: <Home /> },
       { path: "/login", element: <Login /> },
       { path: "/register", element: <Register /> },
-      { path: "/add-listing", element: <AddListing /> },
+
+      
+      {
+        path: "/add-listing",
+        element: (
+          <PrivateRoute>
+            <AddListing />
+          </PrivateRoute>
+        ),
+      },
+
       { path: "/pets-supplies", element: <PetsSupplies /> },
       { path: "/listing-details/:id", element: <ListingDetails /> },
       { path: "/my-listings", element: <MyListings /> },
       { path: "/my-orders", element: <MyOrders /> },
+      {
+        path: "/category-filtered-product/:categoryName",
+        element: <CategoryFilteredProduct />,
+      },
     ],
   },
 ]);

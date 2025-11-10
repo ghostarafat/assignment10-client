@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
+import Banner from "../components/Banner";
+import CategorySection from "../components/CategorySection";
+
 const Home = () => {
   const [listings, setListings] = useState([]);
 
@@ -14,43 +16,10 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Banner Section */}
-      <section className="bg-blue-500 text-white py-12 text-center">
-        <h1 className="text-4xl font-bold mb-2">
-          Find Your Furry Friend Today!
-        </h1>
-        <p className="text-lg">Adopt, Don’t Shop — Give a Pet a Home.</p>
-      </section>
+      <Banner />
 
       {/* Category Section */}
-      <section className="py-12 container mx-auto">
-        <h2 className="text-2xl font-bold mb-6 text-center">Categories</h2>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          <Link
-            to="/category-filtered-product/Pets"
-            className="bg-white p-4 rounded shadow hover:shadow-lg text-center"
-          >
-            🐶 Pets (Adoption)
-          </Link>
-          <Link
-            to="/category-filtered-product/Pet Food"
-            className="bg-white p-4 rounded shadow hover:shadow-lg text-center"
-          >
-            🍖 Pet Food
-          </Link>
-          <Link
-            to="/category-filtered-product/Accessories"
-            className="bg-white p-4 rounded shadow hover:shadow-lg text-center"
-          >
-            🐾 Accessories
-          </Link>
-          <Link
-            to="/category-filtered-product/Pet Care Products"
-            className="bg-white p-4 rounded shadow hover:shadow-lg text-center"
-          >
-            🧴 Pet Care Products
-          </Link>
-        </div>
-      </section>
+      <CategorySection />
 
       {/* Recent Listings */}
       <section className="py-12 container mx-auto">

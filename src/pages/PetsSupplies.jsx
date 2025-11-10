@@ -13,7 +13,7 @@ const PetsSupplies = () => {
   useEffect(() => {
     const fetchListings = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/listings");
+        const response = await axios.get("http://localhost:3000/listings");
         setListings(response.data);
         setFilteredListings(response.data);
       } catch (error) {

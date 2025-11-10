@@ -32,7 +32,7 @@ const AddListing = () => {
     };
 
     try {
-      await axios.post("http://localhost:5000/listings", payload);
+      await axios.post("http://localhost:3000/listings", payload);
       toast.success("Listing added successfully!");
       setFormData({
         name: "",
