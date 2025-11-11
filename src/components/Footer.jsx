@@ -27,7 +27,7 @@ const Footer = () => {
           <div className="flex flex-col space-y-3 text-center md:text-left animate-fadeIn">
             <Link
               to="/"
-              className="text-2xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-pink-500 flex items-center gap-1"
+              className=" text-2xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-pink-500 flex items-center gap-1"
             >
               <span>Paw</span>
               <span className="text-white/90">Mart</span>
@@ -100,7 +100,6 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Bottom Copyright */}
         <div className="border-t border-gray-700 mt-10 pt-6 text-center text-gray-500 text-sm">
           &copy; {new Date().getFullYear()} PawMart. All rights reserved.
         </div>

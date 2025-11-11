@@ -79,7 +79,7 @@ const Home = () => {
         <h2 className="text-3xl md:text-4xl font-extrabold mb-6 text-pink-700">
           Why Adopt from PawMart?
         </h2>
-        <p className="max-w-2xl mx-auto text-lg md:text-xl text-gray-700">
+        <p className="max-w-2xl mx-auto text-lg md:text-xl text-gray-700 px-6 md:px-0">
           Every pet deserves a loving home. Adopting reduces stray animals and
           gives pets a second chance at life. Join us in making a difference!
         </p>
