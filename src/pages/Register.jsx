@@ -38,7 +38,7 @@ export default function Register() {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
+    <div className="flex justify-center items-center h-screen ">
       <form
         onSubmit={handleRegister}
         className="bg-white p-6 rounded-lg shadow-md w-80"
