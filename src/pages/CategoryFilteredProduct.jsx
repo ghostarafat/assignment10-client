@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
+import { ThemeContext } from "../context/ThemeContext";
 
 const CategoryFilteredProduct = () => {
   const { categoryName } = useParams();
   const [filteredListings, setFilteredListings] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     setLoading(true);
@@ -31,8 +34,12 @@ const CategoryFilteredProduct = () => {
     );
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white py-12">
-      <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-8 text-gray-800 capitalize">
+    <div className="min-h-screen max-w-[1440px] mx-auto py-12">
+      <h2
+        className={`text-3xl md:text-4xl font-extrabold text-center mb-8 text-gray-800 capitalize ${
+          theme === "light" ? " text-black" : " text-white"
+        }`}
+      >
         {categoryName} Listings
       </h2>
 

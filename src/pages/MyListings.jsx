@@ -50,7 +50,7 @@ const MyListings = () => {
   if (loading) return <p className="text-center mt-10">Loading...</p>;
 
   return (
-    <div className="min-h-screen p-6">
+    <div className="min-h-screen max-w-[1440px] mx-auto p-6">
       <h2 className="text-2xl font-bold mb-4">My Listings</h2>
       {listings.length === 0 && <p>No listings found.</p>}
 

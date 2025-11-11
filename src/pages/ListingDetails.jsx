@@ -80,7 +80,7 @@ const ListingDetails = () => {
 
   return (
     <div
-      className={`min-h-screen p-6 transition-colors duration-500 ${
+      className={`min-h-screen max-w-[1440px] mx-auto  p-6 transition-colors duration-500 ${
         theme === "light"
           ? "bg-gray-50 text-gray-900"
           : "bg-gray-900 text-gray-100"

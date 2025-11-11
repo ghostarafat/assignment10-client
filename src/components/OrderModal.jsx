@@ -21,7 +21,7 @@ const OrderModal = ({ listing, onClose }) => {
       productName: listing.name,
       buyerName: user.displayName || user.email,
       email: user.email,
-      quantity: listing.category === "Pets" ? 1 : 1, // simplicity
+      quantity: listing.category === "Pets" ? 1 : 1,
       price: listing.category === "Pets" ? 0 : listing.price,
       address,
       phone,
