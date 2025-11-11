@@ -24,7 +24,7 @@ const router = createBrowserRouter([
     element: <Layout />,
     errorElement: <ErrorPage />,
     children: [
-      // 🏠 Public Routes
+      // Public Routes
       { path: "/", element: <Home /> },
       { path: "/login", element: <Login /> },
       { path: "/register", element: <Register /> },
@@ -34,7 +34,7 @@ const router = createBrowserRouter([
         element: <CategoryFilteredProduct />,
       },
 
-      // 🔒 Private Routes (Only for Logged-in Users)
+      //  Private Routes (Only for Logged-in Users)
       {
         path: "/add-listing",
         element: (

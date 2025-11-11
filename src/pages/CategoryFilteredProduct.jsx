@@ -10,7 +10,9 @@ const CategoryFilteredProduct = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://localhost:3000/listings?category=${categoryName}`)
+      .get(
+        `https://assignment10-server-nine-eta.vercel.app/listings?category=${categoryName}`
+      )
       .then((res) => setFilteredListings(res.data))
       .catch((err) => console.error(err))
       .finally(() => setLoading(false));
@@ -73,7 +75,7 @@ const CategoryFilteredProduct = () => {
               </p>
 
               <Link
-                to={`/listing/${item._id}`}
+                to={`/listing-details/${item._id}`}
                 className="mt-auto bg-blue-600 text-white py-2 px-3 rounded-xl text-center font-medium hover:bg-blue-700 transition"
               >
                 See Details

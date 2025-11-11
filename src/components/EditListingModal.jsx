@@ -21,7 +21,7 @@ const EditListingModal = ({ listing, onClose, onUpdate }) => {
     e.preventDefault();
     try {
       await axios.put(
-        `http://localhost:3000/listings/${listing._id}`,
+        `https://assignment10-server-nine-eta.vercel.app/listings/${listing._id}`,
         formData
       );
       toast.success("Listing updated successfully!");

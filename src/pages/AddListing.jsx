@@ -32,7 +32,10 @@ const AddListing = () => {
     };
 
     try {
-      await axios.post("http://localhost:3000/listings", payload);
+      await axios.post(
+        "https://assignment10-server-nine-eta.vercel.app/listings",
+        payload
+      );
       toast.success("Listing added successfully!");
       setFormData({
         name: "",
@@ -50,25 +53,30 @@ const AddListing = () => {
   };
 
   return (
-    <div className="min-h-screen p-6">
-      <div className="max-w-3xl mx-auto border p-4 rounded shadow">
-        <h2 className="text-2xl font-bold mb-4">Add New Listing</h2>
-        <form onSubmit={handleSubmit} className="space-y-3">
+    <div className="min-h-screen p-6  dark:bg-gray-900 transition-colors duration-300">
+      <div className="max-w-3xl mx-auto border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg transition">
+        <h2 className="text-3xl font-bold mb-6 text-center text-gray-900 dark:text-gray-100">
+          🐾 Add New Listing
+        </h2>
+
+        <form onSubmit={handleSubmit} className="space-y-4">
+          {/* Name */}
           <input
             type="text"
             name="name"
-            placeholder="Product/Pet Name"
+            placeholder="Product / Pet Name"
             value={formData.name}
             onChange={handleChange}
             required
-            className="w-full p-2 border rounded"
+            className="w-full p-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
           />
 
+          {/* Category */}
           <select
             name="category"
             value={formData.category}
             onChange={handleChange}
-            className="w-full p-2 border rounded"
+            className="w-full p-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
           >
             <option value="Pets">Pets</option>
             <option value="Pet Food">Pet Food</option>
@@ -76,15 +84,17 @@ const AddListing = () => {
             <option value="Pet Care Products">Pet Care Products</option>
           </select>
 
+          {/* Price */}
           <input
             type="number"
             name="price"
             placeholder="Price (0 if pet)"
             value={formData.price}
             onChange={handleChange}
-            className="w-full p-2 border rounded"
+            className="w-full p-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
           />
 
+          {/* Location */}
           <input
             type="text"
             name="location"
@@ -92,18 +102,21 @@ const AddListing = () => {
             value={formData.location}
             onChange={handleChange}
             required
-            className="w-full p-2 border rounded"
+            className="w-full p-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
           />
 
+          {/* Description */}
           <textarea
             name="description"
             placeholder="Description"
             value={formData.description}
             onChange={handleChange}
             required
-            className="w-full p-2 border rounded"
+            rows="4"
+            className="w-full p-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
           />
 
+          {/* Image URL */}
           <input
             type="text"
             name="image"
@@ -111,21 +124,23 @@ const AddListing = () => {
             value={formData.image}
             onChange={handleChange}
             required
-            className="w-full p-2 border rounded"
+            className="w-full p-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
           />
 
+          {/* Date */}
           <input
             type="date"
             name="date"
             value={formData.date}
             onChange={handleChange}
             required
-            className="w-full p-2 border rounded"
+            className="w-full p-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
           />
 
+          {/* Submit Button */}
           <button
             type="submit"
-            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+            className="w-full py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-semibold shadow-md"
           >
             Add Listing
           </button>

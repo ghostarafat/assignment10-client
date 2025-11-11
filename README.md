@@ -26,5 +26,5 @@
 
 ## 👩‍💻 Developer
 
-Arafat Hossain  
+Arafat Hossain
 arafathossain173737@email.com

@@ -36,10 +36,14 @@ const Navbar = () => {
           <img
             src="https://cdn-icons-png.flaticon.com/512/616/616408.png"
             alt="logo"
-            className="w-8 h-8"
+            className="w-10 h-10"
           />
-          <Link to="/" className="text-2xl font-bold">
-            PawMart
+          <Link
+            to="/"
+            className="text-2xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-pink-500 flex items-center gap-1"
+          >
+            <span>Paw</span>
+            <span className="text-white/90">Mart</span>
           </Link>
         </div>
 

@@ -3,10 +3,13 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../providers/AuthProvider";
 import toast from "react-hot-toast";
+import { ThemeContext } from "../context/ThemeContext";
 
 const ListingDetails = () => {
   const { id } = useParams();
   const { user } = useContext(AuthContext);
+  const { theme } = useContext(ThemeContext);
+
   const [listing, setListing] = useState(null);
   const [loading, setLoading] = useState(true);
   const [orderData, setOrderData] = useState({
@@ -14,6 +17,7 @@ const ListingDetails = () => {
     phone: "",
     date: "",
     additionalNotes: "",
+    quantity: 1,
   });
   const [showOrderForm, setShowOrderForm] = useState(false);
 
@@ -21,7 +25,7 @@ const ListingDetails = () => {
     const fetchListing = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/listings/${id}`
+          `https://assignment10-server-nine-eta.vercel.app/listings/${id}`
         );
         setListing(response.data);
       } catch (error) {
@@ -50,7 +54,7 @@ const ListingDetails = () => {
       productName: listing.name,
       buyerName: user.displayName || "Anonymous",
       email: user.email,
-      quantity: listing.category === "Pets" ? 1 : orderData.quantity || 1,
+      quantity: listing.category === "Pets" ? 1 : orderData.quantity,
       price: listing.price,
       address: orderData.address,
       date: orderData.date,
@@ -59,7 +63,10 @@ const ListingDetails = () => {
     };
 
     try {
-      await axios.post("http://localhost:3000/orders", orderPayload);
+      await axios.post(
+        "https://assignment10-server-nine-eta.vercel.app/orders",
+        orderPayload
+      );
       toast.success("Order placed successfully!");
       setShowOrderForm(false);
     } catch (error) {
@@ -72,7 +79,13 @@ const ListingDetails = () => {
   if (!listing) return <p>Listing not found</p>;
 
   return (
-    <div className="min-h-screen p-6">
+    <div
+      className={`min-h-screen p-6 transition-colors duration-500 ${
+        theme === "light"
+          ? "bg-gray-50 text-gray-900"
+          : "bg-gray-900 text-gray-100"
+      }`}
+    >
       <div className="flex flex-col md:flex-row gap-6">
         {/* Image */}
         <img
@@ -83,19 +96,27 @@ const ListingDetails = () => {
 
         {/* Details */}
         <div className="flex-1 flex flex-col gap-2">
-          <h2 className="text-2xl font-bold">{listing.name}</h2>
-          <p className="text-gray-600">{listing.category}</p>
-          <p className="text-gray-700">{listing.description}</p>
-          <p className="text-gray-700">
+          <h2 className={`text-2xl font-bold`}>{listing.name}</h2>
+          <p className={theme === "light" ? "text-gray-600" : "text-gray-300"}>
+            {listing.category}
+          </p>
+          <p className={theme === "light" ? "text-gray-700" : "text-gray-200"}>
+            {listing.description}
+          </p>
+          <p className={theme === "light" ? "text-gray-700" : "text-gray-200"}>
             {listing.price > 0 ? `$${listing.price}` : "Free for Adoption"}
           </p>
-          <p className="text-gray-500">{listing.location}</p>
-          <p className="text-gray-400">Owner: {listing.email}</p>
+          <p className={theme === "light" ? "text-gray-500" : "text-gray-400"}>
+            {listing.location}
+          </p>
+          <p className={theme === "light" ? "text-gray-400" : "text-gray-500"}>
+            Owner: {listing.email}
+          </p>
 
           {/* Order Button */}
           <button
             onClick={() => setShowOrderForm(!showOrderForm)}
-            className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+            className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
           >
             Adopt / Order Now
           </button>
@@ -103,6 +124,22 @@ const ListingDetails = () => {
           {/* Order Form */}
           {showOrderForm && (
             <form onSubmit={handleOrder} className="mt-4 flex flex-col gap-2">
+              {listing.category !== "Pets" && (
+                <input
+                  type="number"
+                  name="quantity"
+                  placeholder="Quantity"
+                  min="1"
+                  value={orderData.quantity}
+                  onChange={handleChange}
+                  required
+                  className={`border p-2 rounded ${
+                    theme === "light"
+                      ? "bg-white text-black"
+                      : "bg-gray-700 text-white"
+                  }`}
+                />
+              )}
               <input
                 type="text"
                 name="address"
@@ -110,7 +147,11 @@ const ListingDetails = () => {
                 value={orderData.address}
                 onChange={handleChange}
                 required
-                className="border p-2 rounded"
+                className={`border p-2 rounded ${
+                  theme === "light"
+                    ? "bg-white text-black"
+                    : "bg-gray-700 text-white"
+                }`}
               />
               <input
                 type="text"
@@ -119,7 +160,11 @@ const ListingDetails = () => {
                 value={orderData.phone}
                 onChange={handleChange}
                 required
-                className="border p-2 rounded"
+                className={`border p-2 rounded ${
+                  theme === "light"
+                    ? "bg-white text-black"
+                    : "bg-gray-700 text-white"
+                }`}
               />
               <input
                 type="date"
@@ -127,14 +172,22 @@ const ListingDetails = () => {
                 value={orderData.date}
                 onChange={handleChange}
                 required
-                className="border p-2 rounded"
+                className={`border p-2 rounded ${
+                  theme === "light"
+                    ? "bg-white text-black"
+                    : "bg-gray-700 text-white"
+                }`}
               />
               <textarea
                 name="additionalNotes"
                 placeholder="Additional Notes"
                 value={orderData.additionalNotes}
                 onChange={handleChange}
-                className="border p-2 rounded"
+                className={`border p-2 rounded ${
+                  theme === "light"
+                    ? "bg-white text-black"
+                    : "bg-gray-700 text-white"
+                }`}
               />
               <button
                 type="submit"

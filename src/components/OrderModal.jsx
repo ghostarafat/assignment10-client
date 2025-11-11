@@ -30,7 +30,10 @@ const OrderModal = ({ listing, onClose }) => {
     };
 
     try {
-      await axios.post("http://localhost:3000/orders", orderData);
+      await axios.post(
+        "https://assignment10-server-nine-eta.vercel.app/orders",
+        orderData
+      );
       toast.success("Order placed successfully!");
       onClose();
     } catch (error) {

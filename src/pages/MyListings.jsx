@@ -16,7 +16,7 @@ const MyListings = () => {
     setLoading(true);
     try {
       const res = await axios.get(
-        `http://localhost:3000/listings?email=${user.email}` // ✅ Changed port to 3000
+        `https://assignment10-server-nine-eta.vercel.app/listings?email=${user.email}` // ✅ Changed port to 3000
       );
       setListings(res.data);
     } catch (error) {
@@ -36,7 +36,9 @@ const MyListings = () => {
     if (!window.confirm("Are you sure you want to delete this listing?"))
       return;
     try {
-      await axios.delete(`http://localhost:3000/listings/${id}`); // ✅ Changed port
+      await axios.delete(
+        `https://assignment10-server-nine-eta.vercel.app/listings/${id}`
+      ); // ✅ Changed port
       toast.success("Listing deleted!");
       fetchListings();
     } catch (error) {
@@ -52,7 +54,7 @@ const MyListings = () => {
       <h2 className="text-2xl font-bold mb-4">My Listings</h2>
       {listings.length === 0 && <p>No listings found.</p>}
 
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto bg-white">
         <table className="table-auto w-full border border-gray-300">
           <thead>
             <tr className="bg-gray-200">

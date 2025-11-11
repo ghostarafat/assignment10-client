@@ -13,7 +13,7 @@ const MyOrders = () => {
   const fetchOrders = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:3000/orders?email=${user.email}`
+        `https://assignment10-server-nine-eta.vercel.app/orders?email=${user.email}`
       );
       setOrders(res.data);
     } catch (error) {
@@ -70,8 +70,8 @@ const MyOrders = () => {
     <div className="min-h-screen p-6">
       <h2 className="text-2xl font-bold mb-4">My Orders</h2>
       {orders.length === 0 && <p>No orders found.</p>}
-      <div className="overflow-x-auto">
-        <table className="table-auto w-full border border-gray-300">
+      <div className="overflow-x-auto bg-white">
+        <table className="table-auto w-full border border-gray-300 ">
           <thead>
             <tr className="bg-gray-200">
               <th className="border px-4 py-2">Product Name</th>
