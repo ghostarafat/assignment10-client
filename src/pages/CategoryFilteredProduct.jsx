@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import { ThemeContext } from "../context/ThemeContext";
+import ListingCard from "../components/ListingCard";
 
 const CategoryFilteredProduct = () => {
   const { categoryName } = useParams();
@@ -34,10 +35,10 @@ const CategoryFilteredProduct = () => {
     );
 
   return (
-    <div className="min-h-screen max-w-[1440px] mx-auto py-12">
+    <div className="min-h-screen max-w-[1440px] mx-auto py-12 px-4">
       <h2
-        className={`text-3xl md:text-4xl font-extrabold text-center mb-8 text-gray-800 capitalize ${
-          theme === "light" ? " text-black" : " text-white"
+        className={`text-3xl md:text-4xl font-extrabold text-center mb-8 capitalize ${
+          theme === "light" ? "text-black" : "text-white"
         }`}
       >
         {categoryName} Listings
@@ -46,48 +47,17 @@ const CategoryFilteredProduct = () => {
       {filteredListings.length === 0 ? (
         <div className="text-center text-gray-600 mt-20">
           <p className="text-xl">😔 No products found for this category.</p>
-          <Link
-            to="/"
+          <a
+            href="/"
             className="inline-block mt-6 bg-blue-600 text-white py-2 px-5 rounded hover:bg-blue-700 transition"
           >
             Back to Home
-          </Link>
+          </a>
         </div>
       ) : (
-        <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredListings.map((item) => (
-            <div
-              key={item._id}
-              className="bg-white rounded-2xl shadow-md p-4 flex flex-col hover:shadow-lg transition"
-            >
-              <img
-                src={item.image}
-                alt={item.name}
-                className="w-full h-56 object-cover mb-3 rounded-xl"
-              />
-              <h3 className="font-semibold text-lg text-gray-800 mb-1">
-                {item.name}
-              </h3>
-              <p className="text-gray-600 text-sm mb-1">
-                Category: <span className="font-medium">{item.category}</span>
-              </p>
-              <p className="text-gray-600 text-sm mb-1">
-                Price:{" "}
-                <span className="font-medium">
-                  {item.price > 0 ? `$${item.price}` : "Free for Adoption"}
-                </span>
-              </p>
-              <p className="text-gray-600 text-sm mb-3">
-                Location: <span className="font-medium">{item.location}</span>
-              </p>
-
-              <Link
-                to={`/listing-details/${item._id}`}
-                className="mt-auto bg-blue-600 text-white py-2 px-3 rounded-xl text-center font-medium hover:bg-blue-700 transition"
-              >
-                See Details
-              </Link>
-            </div>
+            <ListingCard key={item._id} item={item} theme={theme} />
           ))}
         </div>
       )}

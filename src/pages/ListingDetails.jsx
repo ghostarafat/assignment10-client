@@ -4,6 +4,7 @@ import axios from "axios";
 import { AuthContext } from "../providers/AuthProvider";
 import toast from "react-hot-toast";
 import { ThemeContext } from "../context/ThemeContext";
+import { Typewriter } from "react-simple-typewriter";
 
 const ListingDetails = () => {
   const { id } = useParams();
@@ -80,7 +81,7 @@ const ListingDetails = () => {
 
   return (
     <div
-      className={`min-h-screen max-w-[1440px] mx-auto  p-6 transition-colors duration-500 ${
+      className={`min-h-screen max-w-[1440px] mx-auto p-6 transition-colors duration-500 ${
         theme === "light"
           ? "bg-gray-50 text-gray-900"
           : "bg-gray-900 text-gray-100"
@@ -96,7 +97,22 @@ const ListingDetails = () => {
 
         {/* Details */}
         <div className="flex-1 flex flex-col gap-2">
-          <h2 className={`text-2xl font-bold`}>{listing.name}</h2>
+          <h2 className="text-3xl font-bold">
+            <Typewriter
+              words={[
+                listing.name,
+                "Available Now!",
+                "Order Before It's Gone!",
+              ]}
+              loop={true}
+              cursor
+              cursorStyle="|"
+              typeSpeed={80}
+              deleteSpeed={50}
+              delaySpeed={1500}
+            />
+          </h2>
+
           <p className={theme === "light" ? "text-gray-600" : "text-gray-300"}>
             {listing.category}
           </p>

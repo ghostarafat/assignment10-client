@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useContext } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import toast from "react-hot-toast";
 import { ThemeContext } from "../context/ThemeContext";
+import ListingCard from "../components/ListingCard";
 
 const PetsSupplies = () => {
   const [listings, setListings] = useState([]);
@@ -13,7 +14,6 @@ const PetsSupplies = () => {
 
   const { theme } = useContext(ThemeContext);
 
-  // Fetch listings from server
   useEffect(() => {
     const fetchListings = async () => {
       try {
@@ -33,7 +33,6 @@ const PetsSupplies = () => {
     fetchListings();
   }, []);
 
-  // Filter by category + search
   useEffect(() => {
     let filtered = listings;
 
@@ -109,43 +108,8 @@ const PetsSupplies = () => {
         </p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {filteredListings.map((listing) => (
-            <div
-              key={listing._id}
-              className={`border rounded-2xl shadow-sm overflow-hidden transition transform hover:-translate-y-1 hover:shadow-lg ${
-                theme === "light"
-                  ? "bg-white border-gray-200 hover:shadow-blue-500/30"
-                  : "bg-gray-800 border-gray-700 hover:shadow-blue-500/50"
-              }`}
-            >
-              <img
-                src={listing.image}
-                alt={listing.name}
-                className="w-full h-48 object-cover rounded-t-2xl"
-              />
-              <div className="p-4">
-                <h3 className="font-bold text-lg mb-1">{listing.name}</h3>
-                <p className="text-sm mb-1">{listing.category}</p>
-                <p className="font-semibold mb-1">
-                  {listing.price > 0
-                    ? `$${listing.price}`
-                    : "Free for Adoption"}
-                </p>
-                <p
-                  className={`text-sm mb-2 ${
-                    theme === "light" ? "text-gray-600" : "text-gray-400"
-                  }`}
-                >
-                  {listing.location}
-                </p>
-                <Link
-                  to={`/listing-details/${listing._id}`}
-                  className="inline-block mt-2 px-3 py-1 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
-                >
-                  See Details
-                </Link>
-              </div>
-            </div>
+          {filteredListings.map((item) => (
+            <ListingCard key={item._id} item={item} theme={theme} />
           ))}
         </div>
       )}

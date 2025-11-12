@@ -2,8 +2,8 @@ import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import Banner from "../components/Banner";
 import CategorySection from "../components/CategorySection";
-import { Link } from "react-router-dom";
 import { ThemeContext } from "../context/ThemeContext";
+import ListingCard from "../components/ListingCard";
 
 const Home = () => {
   const [listings, setListings] = useState([]);
@@ -42,34 +42,7 @@ const Home = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {listings.map((item) => (
-            <div
-              key={item._id}
-              className={`rounded-xl shadow-md overflow-hidden flex flex-col transition transform hover:scale-105 duration-300 ${
-                theme === "light" ? "bg-white" : "bg-gray-800"
-              }`}
-            >
-              <img
-                src={item.image}
-                alt={item.name}
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-4 flex flex-col flex-grow">
-                <h3 className="font-bold text-lg mb-1">{item.name}</h3>
-                <p>Category: {item.category}</p>
-                <p>
-                  Price:{" "}
-                  {item.price > 0 ? `$${item.price}` : "Free for Adoption"}
-                </p>
-                <p>Location: {item.location}</p>
-
-                <Link
-                  to={`/listing-details/${item._id}`}
-                  className="mt-auto bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 text-center transition"
-                >
-                  See Details
-                </Link>
-              </div>
-            </div>
+            <ListingCard key={item._id} item={item} theme={theme} />
           ))}
         </div>
       </section>
