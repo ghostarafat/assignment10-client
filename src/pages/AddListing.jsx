@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { motion } from "framer-motion"; // 👈 Import Framer Motion
 
 const AddListing = () => {
   const { user } = useContext(AuthContext);
@@ -26,10 +27,7 @@ const AddListing = () => {
       return;
     }
 
-    const payload = {
-      ...formData,
-      email: user.email,
-    };
+    const payload = { ...formData, email: user.email };
 
     try {
       await axios.post(
@@ -53,15 +51,37 @@ const AddListing = () => {
   };
 
   return (
-    <div className="min-h-screen p-6  dark:bg-gray-900 transition-colors duration-300">
-      <div className="max-w-3xl mx-auto border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg transition">
-        <h2 className="text-3xl font-bold mb-6 text-center text-gray-900 dark:text-gray-100">
+    <motion.div
+      className="min-h-screen p-6 dark:bg-gray-900 transition-colors duration-300"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
+    >
+      <motion.div
+        className="max-w-3xl mx-auto border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg transition"
+        initial={{ y: 50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.7, type: "spring" }}
+      >
+        <motion.h2
+          className="text-3xl font-bold mb-6 text-center text-gray-900 dark:text-gray-100"
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ delay: 0.2, duration: 0.5 }}
+        >
           🐾 Add New Listing
-        </h2>
+        </motion.h2>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <motion.form
+          onSubmit={handleSubmit}
+          className="space-y-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.4, duration: 0.5 }}
+        >
           {/* Name */}
-          <input
+          <motion.input
+            whileFocus={{ scale: 1.02 }}
             type="text"
             name="name"
             placeholder="Product / Pet Name"
@@ -72,7 +92,8 @@ const AddListing = () => {
           />
 
           {/* Category */}
-          <select
+          <motion.select
+            whileFocus={{ scale: 1.02 }}
             name="category"
             value={formData.category}
             onChange={handleChange}
@@ -82,10 +103,11 @@ const AddListing = () => {
             <option value="Pet Food">Pet Food</option>
             <option value="Accessories">Accessories</option>
             <option value="Pet Care Products">Pet Care Products</option>
-          </select>
+          </motion.select>
 
           {/* Price */}
-          <input
+          <motion.input
+            whileFocus={{ scale: 1.02 }}
             type="number"
             name="price"
             placeholder="Price (0 if pet)"
@@ -95,7 +117,8 @@ const AddListing = () => {
           />
 
           {/* Location */}
-          <input
+          <motion.input
+            whileFocus={{ scale: 1.02 }}
             type="text"
             name="location"
             placeholder="Location"
@@ -106,7 +129,8 @@ const AddListing = () => {
           />
 
           {/* Description */}
-          <textarea
+          <motion.textarea
+            whileFocus={{ scale: 1.02 }}
             name="description"
             placeholder="Description"
             value={formData.description}
@@ -117,7 +141,8 @@ const AddListing = () => {
           />
 
           {/* Image URL */}
-          <input
+          <motion.input
+            whileFocus={{ scale: 1.02 }}
             type="text"
             name="image"
             placeholder="Image URL"
@@ -128,7 +153,8 @@ const AddListing = () => {
           />
 
           {/* Date */}
-          <input
+          <motion.input
+            whileFocus={{ scale: 1.02 }}
             type="date"
             name="date"
             value={formData.date}
@@ -138,15 +164,17 @@ const AddListing = () => {
           />
 
           {/* Submit Button */}
-          <button
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.97 }}
             type="submit"
             className="w-full py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-semibold shadow-md"
           >
             Add Listing
-          </button>
-        </form>
-      </div>
-    </div>
+          </motion.button>
+        </motion.form>
+      </motion.div>
+    </motion.div>
   );
 };
 
