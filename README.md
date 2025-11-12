@@ -1,7 +1,9 @@
 # 🐾 PawMart — Pet Adoption & Supply Portal
 
+A modern full-stack web application where users can adopt pets, buy pet supplies, and manage their listings — all in one place. Built with the MERN stack for smooth performance and an intuitive user experience.
+
 🔗 **Live Site:** https://assignment10b12.netlify.app/
-🔗 **Server:**
+🔗 **Server:**https://assignment10-server-nine-eta.vercel.app/
 
 ---
 
@@ -27,4 +29,4 @@
 ## 👩‍💻 Developer
 
 Arafat Hossain
-arafathossain173737@email.com
+arafathossain173737@gmail.com
