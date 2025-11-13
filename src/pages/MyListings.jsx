@@ -153,44 +153,49 @@ const MyListings = () => {
         </div>
 
         {/*  Mobile View (Cards) */}
-        <div className="block md:hidden space-y-4 p-2">
+        <div className="block md:hidden space-y-4 p-3">
           <AnimatePresence>
             {listings.map((listing) => (
               <motion.div
                 key={listing._id}
-                initial={{ opacity: 0, y: 10 }}
+                initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.3 }}
-                className="border rounded-lg p-4 shadow-sm bg-gray-50"
+                exit={{ opacity: 0, y: -15 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                className="border border-blue-100 rounded-xl p-4 shadow-sm bg-white dark:bg-gray-800 dark:border-gray-700"
               >
-                <p className="font-semibold text-lg">{listing.name}</p>
-                <p className="text-sm text-gray-600">{listing.category}</p>
-                <p className="text-sm mt-1">
+                <p className="font-semibold text-lg text-gray-900 dark:text-gray-100 mb-1">
+                  {listing.name}
+                </p>
+
+                <p className="inline-block text-xs font-medium text-gray-800 dark:text-gray-100 bg-blue-200 dark:bg-blue-600/60 px-2 py-0.5 rounded-full mb-2">
+                  {listing.category}
+                </p>
+
+                <p className="text-sm text-gray-700 dark:text-gray-300">
                   <span className="font-medium">Price:</span>{" "}
                   {listing.category === "Pets"
                     ? "Free for Adoption"
                     : `$${listing.price}`}
                 </p>
-                <p className="text-sm">
+
+                <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
                   <span className="font-medium">Location:</span>{" "}
                   {listing.location}
                 </p>
 
                 <div className="flex gap-2 mt-3">
                   <motion.button
-                    whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => setEditListing(listing)}
-                    className="w-1/2 bg-yellow-400 py-1 rounded hover:bg-yellow-500 text-sm"
+                    className="w-1/2 bg-yellow-400 text-gray-800 py-1.5 rounded-lg text-sm font-medium"
                   >
                     Edit
                   </motion.button>
                   <motion.button
-                    whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => handleDelete(listing._id)}
-                    className="w-1/2 bg-red-500 py-1 text-white rounded hover:bg-red-600 text-sm"
+                    className="w-1/2 bg-red-500 text-white py-1.5 rounded-lg text-sm font-medium"
                   >
                     Delete
                   </motion.button>
