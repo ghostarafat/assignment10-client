@@ -2,8 +2,7 @@ import React, { useState, useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { motion } from "framer-motion"; // 👈 Import Framer Motion
-
+import { motion } from "framer-motion";
 const AddListing = () => {
   const { user } = useContext(AuthContext);
   const [formData, setFormData] = useState({
