@@ -79,17 +79,27 @@ const MyListings = () => {
       )}
 
       {/*  Responsive Layout */}
-      <div className="bg-white rounded-lg shadow-md overflow-hidden">
+      <div className="bg-white  rounded-lg shadow-md overflow-hidden">
         {/* Desktop & Tablet View */}
         <div className="hidden md:block overflow-x-auto">
           <table className="min-w-full border border-gray-300 text-sm md:text-base">
             <thead>
               <tr className="bg-gray-200 text-gray-700">
-                <th className="border px-4 py-2 text-left">Name</th>
-                <th className="border px-4 py-2 text-left">Category</th>
-                <th className="border px-4 py-2 text-left">Price</th>
-                <th className="border px-4 py-2 text-left">Location</th>
-                <th className="border px-4 py-2 text-left">Actions</th>
+                <th className="border border-gray-200 text-gray-600 px-4 py-2 text-left">
+                  Name
+                </th>
+                <th className="border border-gray-200 text-gray-600 px-4 py-2 text-left">
+                  Category
+                </th>
+                <th className="border border-gray-200 text-gray-600 px-4 py-2 text-left">
+                  Price
+                </th>
+                <th className="border border-gray-200 text-gray-600 px-4 py-2 text-left">
+                  Location
+                </th>
+                <th className="border border-gray-200 text-gray-600 px-4 py-2 text-left">
+                  Actions
+                </th>
               </tr>
             </thead>
             <AnimatePresence>
@@ -103,21 +113,21 @@ const MyListings = () => {
                     transition={{ duration: 0.3 }}
                     className="hover:bg-gray-100"
                   >
-                    <td className="border px-4 py-2 text-black">
+                    <td className="border border-gray-200 text-gray-600 px-4 py-2 text-black">
                       {listing.name}
                     </td>
-                    <td className="border px-4 py-2 text-black">
+                    <td className="border border-gray-200 text-gray-600 px-4 py-2 text-black">
                       {listing.category}
                     </td>
-                    <td className="border px-4 py-2 text-black">
+                    <td className="border border-gray-200 text-gray-600 px-4 py-2 text-black">
                       {listing.category === "Pets"
                         ? "Free for Adoption"
                         : `$${listing.price}`}
                     </td>
-                    <td className="border px-4 py-2 text-black">
+                    <td className="border border-gray-200 text-gray-600 px-4 py-2 text-black">
                       {listing.location}
                     </td>
-                    <td className="border px-4 py-2 flex gap-2 text-black">
+                    <td className="border border-gray-200 text-gray-600 px-4 py-2 flex gap-2 text-black">
                       <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
