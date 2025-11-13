@@ -78,7 +78,7 @@ const MyListings = () => {
         </motion.p>
       )}
 
-      {/* ✅ Responsive Layout */}
+      {/*  Responsive Layout */}
       <div className="bg-white rounded-lg shadow-md overflow-hidden">
         {/* Desktop & Tablet View */}
         <div className="hidden md:block overflow-x-auto">
@@ -103,15 +103,21 @@ const MyListings = () => {
                     transition={{ duration: 0.3 }}
                     className="hover:bg-gray-100"
                   >
-                    <td className="border px-4 py-2">{listing.name}</td>
-                    <td className="border px-4 py-2">{listing.category}</td>
-                    <td className="border px-4 py-2">
+                    <td className="border px-4 py-2 text-black">
+                      {listing.name}
+                    </td>
+                    <td className="border px-4 py-2 text-black">
+                      {listing.category}
+                    </td>
+                    <td className="border px-4 py-2 text-black">
                       {listing.category === "Pets"
                         ? "Free for Adoption"
                         : `$${listing.price}`}
                     </td>
-                    <td className="border px-4 py-2">{listing.location}</td>
-                    <td className="border px-4 py-2 flex gap-2">
+                    <td className="border px-4 py-2 text-black">
+                      {listing.location}
+                    </td>
+                    <td className="border px-4 py-2 flex gap-2 text-black">
                       <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
@@ -136,7 +142,7 @@ const MyListings = () => {
           </table>
         </div>
 
-        {/* 📱 Mobile View (Cards) */}
+        {/*  Mobile View (Cards) */}
         <div className="block md:hidden space-y-4 p-2">
           <AnimatePresence>
             {listings.map((listing) => (
@@ -185,7 +191,7 @@ const MyListings = () => {
         </div>
       </div>
 
-      {/* ✨ Modal Animation */}
+      {/*  Modal Animation */}
       <AnimatePresence>
         {editListing && (
           <motion.div
