@@ -30,9 +30,9 @@ const Footer = () => {
               className=" text-2xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-pink-500 flex items-center gap-1"
             >
               <span>Paw</span>
-              <span className="text-white/90">Mart</span>
+              <span className="text-white">Mart</span>
             </Link>
-            <p className="text-gray-400">
+            <p className="text-gray-600 dark:text-gray-200">
               Connecting local pet owners and buyers for adoption and pet care
               products. Every paw deserves love!
             </p>

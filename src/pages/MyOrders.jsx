@@ -68,7 +68,7 @@ const MyOrders = () => {
 
   return (
     <div className="min-h-screen max-w-[1440px] mx-auto p-6">
-      <h2 className="text-2xl font-bold mb-4">My Orders</h2>
+      <h2 className="text-2xl font-bold mb-4 text-blue-400">My Orders</h2>
       {orders.length === 0 && <p>No orders found.</p>}
       <div className="overflow-x-auto bg-white">
         <table className="table-auto w-full border border-gray-300 ">

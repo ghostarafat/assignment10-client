@@ -43,7 +43,7 @@ const Navbar = () => {
             className="text-2xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-pink-500 flex items-center gap-1"
           >
             <span>Paw</span>
-            <span className="text-white/90">Mart</span>
+            <span className="text-white">Mart</span>
           </Link>
         </div>
 
