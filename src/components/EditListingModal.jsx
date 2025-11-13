@@ -37,7 +37,7 @@ const EditListingModal = ({ listing, onClose, onUpdate }) => {
   return (
     // Overlay (animated fade-in)
     <motion.div
-      className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50"
+      className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 "
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -51,16 +51,18 @@ const EditListingModal = ({ listing, onClose, onUpdate }) => {
         exit={{ y: 40, opacity: 0 }}
         transition={{ type: "spring", stiffness: 120, damping: 15 }}
       >
-        <h2 className="text-xl font-bold mb-4 text-center">Edit Listing</h2>
+        <h2 className="text-xl font-bold mb-4 text-center text-black">
+          Edit Listing
+        </h2>
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-3 ">
           <input
             type="text"
             name="name"
             value={formData.name}
             onChange={handleChange}
             placeholder="Product/Pet Name"
-            className="border px-3 py-2 rounded focus:ring-2 focus:ring-blue-400"
+            className="border border-gray-200 text-gray-600 px-3 py-2 rounded focus:ring-2 focus:ring-blue-400"
             required
           />
 
@@ -68,7 +70,7 @@ const EditListingModal = ({ listing, onClose, onUpdate }) => {
             name="category"
             value={formData.category}
             onChange={handleChange}
-            className="border px-3 py-2 rounded focus:ring-2 focus:ring-blue-400"
+            className="border border-gray-200 px-3 py-2 rounded focus:ring-2 focus:ring-blue-400 text-gray-600"
             required
           >
             <option value="Pets">Pets</option>
@@ -83,7 +85,7 @@ const EditListingModal = ({ listing, onClose, onUpdate }) => {
             value={formData.price}
             onChange={handleChange}
             placeholder="Price"
-            className="border px-3 py-2 rounded focus:ring-2 focus:ring-blue-400"
+            className="border border-gray-200 text-gray-600 px-3 py-2 rounded focus:ring-2 focus:ring-blue-400 "
             required
           />
 
@@ -93,7 +95,7 @@ const EditListingModal = ({ listing, onClose, onUpdate }) => {
             value={formData.location}
             onChange={handleChange}
             placeholder="Location"
-            className="border px-3 py-2 rounded focus:ring-2 focus:ring-blue-400"
+            className="border border-gray-200 text-gray-600 px-3 py-2 rounded focus:ring-2 focus:ring-blue-400"
             required
           />
 
@@ -102,7 +104,7 @@ const EditListingModal = ({ listing, onClose, onUpdate }) => {
             value={formData.description}
             onChange={handleChange}
             placeholder="Description"
-            className="border px-3 py-2 rounded focus:ring-2 focus:ring-blue-400"
+            className="border border-gray-200 text-gray-600 px-3 py-2 rounded focus:ring-2 focus:ring-blue-400"
             required
           />
 
@@ -112,7 +114,7 @@ const EditListingModal = ({ listing, onClose, onUpdate }) => {
             value={formData.image}
             onChange={handleChange}
             placeholder="Image URL"
-            className="border px-3 py-2 rounded focus:ring-2 focus:ring-blue-400"
+            className="border border-gray-200 text-gray-600 px-3 py-2 rounded focus:ring-2 focus:ring-blue-400"
             required
           />
 
@@ -121,7 +123,7 @@ const EditListingModal = ({ listing, onClose, onUpdate }) => {
             name="date"
             value={formData.date}
             onChange={handleChange}
-            className="border px-3 py-2 rounded focus:ring-2 focus:ring-blue-400"
+            className="border border-gray-200 text-gray-600 px-3 py-2 rounded focus:ring-2 focus:ring-blue-400"
             required
           />
 
