@@ -73,32 +73,54 @@ const MyOrders = () => {
       <div className="overflow-x-auto bg-white">
         <table className="table-auto w-full border border-gray-300 ">
           <thead>
-            <tr className="bg-gray-200">
-              <th className="border px-4 py-2 text-black">Product Name</th>
-              <th className="border px-4 py-2 text-black">Buyer Name</th>
-              <th className="border px-4 py-2 text-black">Price</th>
-              <th className="border px-4 py-2 text-black">Quantity</th>
-              <th className="border px-4 py-2 text-black">Address</th>
-              <th className="border px-4 py-2 text-black">Date</th>
-              <th className="border px-4 py-2 text-black">Phone</th>
+            <tr className="bg-gray-200 ">
+              <th className="border border-gray-200 text-gray-600 px-4 py-2 text-black">
+                Product Name
+              </th>
+              <th className="border border-gray-200 text-gray-600 px-4 py-2 text-black">
+                Buyer Name
+              </th>
+              <th className="border border-gray-200 text-gray-600 px-4 py-2 text-black">
+                Price
+              </th>
+              <th className="border border-gray-200 text-gray-600 px-4 py-2 text-black">
+                Quantity
+              </th>
+              <th className="border border-gray-200 text-gray-600 px-4 py-2 text-black">
+                Address
+              </th>
+              <th className="border border-gray-200 text-gray-600 px-4 py-2 text-black">
+                Date
+              </th>
+              <th className="border border-gray-200 text-gray-600 px-4 py-2 text-black">
+                Phone
+              </th>
             </tr>
           </thead>
           <tbody>
             {orders.map((order) => (
               <tr key={order._id}>
-                <td className="border px-4 py-2 text-black">
+                <td className="border border-gray-200 text-gray-600 px-4 py-2 text-black">
                   {order.productName}
                 </td>
-                <td className="border px-4 py-2 text-black">
+                <td className="border border-gray-200 text-gray-600  px-4 py-2 text-black">
                   {order.buyerName}
                 </td>
-                <td className="border px-4 py-2 text-black">{order.price}</td>
-                <td className="border px-4 py-2 text-black">
+                <td className="border border-gray-200 text-gray-600 px-4 py-2 text-black">
+                  {order.price}
+                </td>
+                <td className="border border-gray-200 text-gray-600 px-4 py-2 text-black">
                   {order.quantity}
                 </td>
-                <td className="border px-4 py-2 text-black">{order.address}</td>
-                <td className="border px-4 py-2 text-black">{order.date}</td>
-                <td className="border px-4 py-2 text-black">{order.phone}</td>
+                <td className="border border-gray-200 text-gray-600 px-4 py-2 text-black">
+                  {order.address}
+                </td>
+                <td className="border border-gray-200 text-gray-600 px-4 py-2 text-black">
+                  {order.date}
+                </td>
+                <td className="border border-gray-200 text-gray-600 px-4 py-2 text-black">
+                  {order.phone}
+                </td>
               </tr>
             ))}
           </tbody>
