@@ -10,9 +10,15 @@ A modern full-stack web application where users can **adopt pets**, **buy pet su
 
 ---
 
-## 🖼 Screenshot
-![PawMart Screenshot](your-screenshot-link-here)  
-> Replace the link above with a hosted image of your project.
+## 🖼 Screenshots
+
+### 🖥️ Desktop View
+![Desktop Homepage](https://i.postimg.cc/gk7vjSWh/desktop-homepage.png)
+
+### 📱 Mobile View
+![Mobile Homepage](https://i.postimg.cc/wMZ7qrsb/mobile-homepage.png)
+
+
 
 ---
 
